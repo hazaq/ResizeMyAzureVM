@@ -42,7 +42,7 @@ dataDiskCount=$(az vm show --name $vmName -g $rgName  --query \
 
 echo -e "Creating the snapshot of the OS Disk"
 diskSnapshot=$(az snapshot create -g $rgName --source $diskID --name "$diskName"-snapshot \
-    --network-access-policy DenyAll --sku Standard_ZRS --tags Project=j2c Purpose=resize)
+    --network-access-policy DenyAll --sku Standard_ZRS Purpose=resize)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
@@ -52,7 +52,7 @@ fi
 echo -e "Creating a new disk from the snpashot"
 newOSDiks=$(az disk create -g $rgName -n "$diskName"-2 --source "$diskName"-snapshot \
     --size-gb $diskSize --sku $diskSAType --os-type $diskOS --hyper-v-generation \
-    V2 --public-network-access Disabled --tags Project=j2c)
+    V2 --public-network-access Disabled)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
@@ -61,7 +61,7 @@ fi
 
 echo -e "Creating a temp NIC"
 tempNIC=$(az network nic create --name "$vmName"-tempnic -g $rgName --subnet \
-    $tempSubnet --vnet-name $tempvNet --tags Project=j2c)
+    $tempSubnet --vnet-name $tempvNet)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
@@ -94,8 +94,7 @@ fi
 
 echo -e "Creating the new VM........"
 resizedVM=$(az vm create -g $rgName --name "$vmName"-2 --attach-os-disk "$diskName"-2 \
-    --os-type $diskOS --size Standard_D2s_v5 --nics $vmNIC --security-type TrustedLaunch \
-    --tags Project=j2c)
+    --os-type $diskOS --size Standard_D2s_v5 --nics $vmNIC --security-type TrustedLaunch)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
