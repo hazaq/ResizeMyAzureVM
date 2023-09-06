@@ -7,11 +7,11 @@ Traditionally and with older generations of Azure VMs, there was a local ephemer
 ## Usage  
 
 Update the following variables before running the VM  
-vmName: Name of the VM you want to resize.  
-rgName: Name of the resource group where the VM is located.  
-newSize: The new SKU for the VM  
-tempvNet: The vNet where the temporary NIC should be created  
-tempSubnet: The subnet where the temporary NIC should be created  
+**vmName**: Name of the VM you want to resize.  
+**rgName**: Name of the resource group where the VM is located.  
+**newSize**: The new SKU for the VM  
+**tempvNet**: The vNet where the temporary NIC should be created  
+**tempSubnet**: The subnet where the temporary NIC should be created  
 
 ## Process  
 Below is the process the scripts follows.  
