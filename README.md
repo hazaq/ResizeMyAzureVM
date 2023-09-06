@@ -6,7 +6,7 @@ Traditionally and with older generations of Azure VMs, there was a local ephemer
 
 
 ## Process  
-Bellow is the process the scripts follows.  
+Below is the process the scripts follows.  
 * The script starts the VM to collect some important information needed during the process, if the VM is already running it should still work.  
 * Next, it collects the information related to the disk and NIC and stops the VM.  
 * It creates a snapshot of the OS Disk and using the same snapshot creates a new OS disk.  
