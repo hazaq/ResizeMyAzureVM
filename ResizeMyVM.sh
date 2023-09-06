@@ -42,7 +42,7 @@ dataDiskCount=$(az vm show --name $vmName -g $rgName  --query \
 
 echo -e "Creating the snapshot of the OS Disk"
 diskSnapshot=$(az snapshot create -g $rgName --source $diskID --name "$diskName"-snapshot \
-    --network-access-policy DenyAll --sku Standard_ZRS Purpose=resize)
+    --network-access-policy DenyAll --sku Standard_ZRS --tags Purpose=resize)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
