@@ -2,15 +2,16 @@
 
 set -e 
 
-###########################################################################
-############### UPDATE BELOW VARIABLES BEFORE RUNNING #####################
-###########################################################################
-vmName='resize-vm'                 # Name of the VM                       #
-rgName='resize-vm_group'           # Name of the resource group           #
-newSize='Standard_D2s_v5'          # New size for the VM                  #
-tempvNet='resize-vm-vnet'          # A VNet to create the temporary NIC   #
-tempSubnet='default'               # A subnet to create the temporary NIC #
-###########################################################################
+#############################################################################
+############### UPDATE BELOW VARIABLES BEFORE RUNNING #######################
+#############################################################################
+vmName='resize-vm'                 # Name of the VM                       ###
+rgName='resize-vm_group'           # Name of the resource group           ###
+newSize='Standard_D2s_v5'          # New size for the VM                  ###
+tempvNet='resize-vm-vnet'          # A VNet to create the temporary NIC   ###
+tempSubnet='default'               # A subnet to create the temporary NIC ###
+#############################################################################
+#############################################################################
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
