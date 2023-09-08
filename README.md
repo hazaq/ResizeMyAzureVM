@@ -13,6 +13,29 @@ Update the following variables before running the VM
 **tempvNet**: The vNet where the temporary NIC should be created  
 **tempSubnet**: The subnet where the temporary NIC should be created  
 
+### Example Usage  
+
+You can pull the script from where you want to run it, for example you can also use the Azure Cloud Shell.  
+Click the 'Cloud Shell' icon from the top right corner. 
+![Azure Cloud Shell](assets/AzureCloudShell.png "Azure Cloud Shell")
+Select Bash, instead of powershell.  
+
+Clone the repo.  
+```
+$ git clone https://github.com/hazaq/ResizeMyAzureVM.git
+```
+
+Update the variable by using your favorit text editor.  
+```
+$ vim ResizeMyVM.sh
+```
+
+Run the script.  
+```
+$ sh ResizeMyVM.sh
+```
+
+
 ## Process  
 Below is the process the scripts follows.  
 * The script starts the VM to collect some important information needed during the process, if the VM is already running it should still work.  
