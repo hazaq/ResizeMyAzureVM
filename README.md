@@ -16,10 +16,14 @@ Update the following variables before running the VM
 ### Example Usage  
 
 You can pull the script from where you want to run it, for example you can also use the Azure Cloud Shell.  
-Click the 'Cloud Shell' icon from the top right corner. 
+Click the 'Cloud Shell' icon from the top right corner.  
+  
 ![Azure Cloud Shell](assets/AzureCloudShell.png "Azure Cloud Shell")
+  
 Select Bash, instead of powershell.  
-
+  
+![Bash](assets/Bash.png "Bash")
+  
 Clone the repo.  
 ```
 $ git clone https://github.com/hazaq/ResizeMyAzureVM.git
