@@ -8,9 +8,10 @@ set -e
 vmName='resize-vm'                 # Name of the VM                       ###
 rgName='resize-vm_group'           # Name of the resource group           ###
 newSize='Standard_D2s_v5'          # New size for the VM                  ###
+tempvNet='resize-vm-vnet'          # A VNet to create the temporary NIC   ###
+tempSubnet='default'               # A subnet to create the temporary NIC ###
 #############################################################################
 #############################################################################
-
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -37,12 +38,8 @@ diskOS=$(az vm show --name $vmName --resource-group $rgName \
     --query 'storageProfile.osDisk.osType' -o tsv)
 vmNIC=$(az vm show --name $vmName --resource-group $rgName \
     --query 'networkProfile.networkInterfaces[0].id' -o tsv)
-dataDiskCount=$(az vm show --name $vmName --resource-group $rgName \
-    --query 'storageProfile.dataDisks' -o tsv  | wc -l)
-nicID=$(az vm show --name $vmName --resource-group $rgName \
-    --query 'networkProfile.networkInterfaces[0].id' -o tsv)
-subnetID=$(az network nic show --ids $nicID --query \
-    'ipConfigurations[0].subnet.id' -o tsv)
+dataDiskCount=$(az vm show --name $vmName -g $rgName  --query \
+    'storageProfile.dataDisks' -o tsv  | wc -l)
 
 echo -e "Creating the snapshot of the OS Disk"
 diskSnapshot=$(az snapshot create -g $rgName --source $diskID --name "$diskName"-snapshot \
@@ -64,7 +61,8 @@ else
 fi
 
 echo -e "Creating a temp NIC"
-tempNIC=$(az network nic create --name "$vmName"-tempnic -g $rgName --subnet $subnetID)
+tempNIC=$(az network nic create --name "$vmName"-tempnic -g $rgName --subnet \
+    $tempSubnet --vnet-name $tempvNet)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
