@@ -49,3 +49,6 @@ Below is the process the scripts follows.
 * First, a temporary NIC is created and attached to the old VM, then the main NIC is detached from the old VM.  
 * Finally, the script creates a new VM with the desired size using the disk created from the snapshot and with the main NIC.  
 * After the VM starts, the script will move the data disk to the new VM.   
+
+**Why does the script create a temporary NIC?**  
+Instead of creating a NIC for the new resized VM, the script is moving the old NIC to the new VM. The benefit of this approach is that we get to preserve the Public/Private IP and other related configurations such as the Network Security Group. As Azure does not allow a VM without a NIC, the script first creates a temporary NIC and attaches it to the original VM, and then detaches the main NIC from the VM, which will be used later in the creation of the resized VM.  
