@@ -11,7 +11,7 @@ newSize='Standard_D2s_v5'          # New size for the VM                  ###
 #############################################################################
 #############################################################################
 
-newVMName=''
+newVMName="$vmName"-2
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -97,7 +97,7 @@ else
 fi
 
 echo -e "Creating the new VM........"
-resizedVM=$(az vm create -g $rgName --name "$vmName"-2 --attach-os-disk "$diskName"-2 \
+resizedVM=$(az vm create -g $rgName --name "$newVMName" --attach-os-disk "$diskName"-2 \
     --os-type $diskOS --size Standard_D2s_v5 --nics $vmNIC --security-type TrustedLaunch)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
@@ -121,7 +121,7 @@ do
     fi 
     
     echo "Attaching data disk $i" 
-    az vm disk attach -g $rgName --name $dataDisk --vm-name "$vmName"-2 --lun $dataDiskLUN --caching $dataDiskCache
+    az vm disk attach -g $rgName --name $dataDisk --vm-name "$newVMName --lun $dataDiskLUN --caching $dataDiskCache
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}[Success]${NC}\n"
     else 
