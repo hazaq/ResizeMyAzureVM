@@ -121,7 +121,7 @@ do
     fi 
     
     echo "Attaching data disk $i" 
-    az vm disk attach -g $rgName --name $dataDisk --vm-name "$newVMName --lun $dataDiskLUN --caching $dataDiskCache
+    az vm disk attach -g $rgName --name $dataDisk --vm-name "$newVMName" --lun $dataDiskLUN --caching $dataDiskCache
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}[Success]${NC}\n"
     else 
