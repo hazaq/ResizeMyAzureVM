@@ -29,7 +29,7 @@ git clone https://github.com/hazaq/ResizeMyAzureVM.git
 
 Update the variable by using your favorit text editor.  
 ```
-cd ResizeMyAzureVM
+cd ResizeMyAzureVM/
 vim ResizeMyVM.sh
 ```
 

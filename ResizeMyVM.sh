@@ -11,6 +11,7 @@ newSize='Standard_D2s_v5'          # New size for the VM                  ###
 #############################################################################
 #############################################################################
 
+#Name of the new VM, the VM name should not be the same as the original VM.
 newVMName="$vmName"-2
 
 GREEN='\033[0;32m'
@@ -98,7 +99,7 @@ fi
 
 echo -e "Creating the new VM........"
 resizedVM=$(az vm create -g $rgName --name "$newVMName" --attach-os-disk "$diskName"-2 \
-    --os-type $diskOS --size Standard_D2s_v5 --nics $vmNIC --security-type TrustedLaunch)
+    --os-type $diskOS --size $newSize --nics $vmNIC --security-type TrustedLaunch)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
