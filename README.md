@@ -24,17 +24,18 @@ Select Bash, instead of powershell.
   
 Clone the repo.  
 ```
-$ git clone https://github.com/hazaq/ResizeMyAzureVM.git
+git clone https://github.com/hazaq/ResizeMyAzureVM.git
 ```
 
 Update the variable by using your favorit text editor.  
 ```
-$ vim ResizeMyVM.sh
+cd ResizeMyAzureVM
+vim ResizeMyVM.sh
 ```
 
 Run the script.  
 ```
-$ sh ResizeMyVM.sh
+sh ResizeMyVM.sh
 ```
 
 
