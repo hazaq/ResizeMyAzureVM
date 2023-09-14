@@ -10,6 +10,7 @@ Update the following variables before running the VM
 **vmName**: Name of the VM you want to resize.  
 **rgName**: Name of the resource group where the VM is located.  
 **newSize**: The new SKU for the VM  
+**subName**: Name or ID of the subscription  
 
 ### Example Usage  
 
