@@ -53,7 +53,7 @@ genType=$(az disk show --disk-name $diskName --resource-group $rgName --subscrip
 #If the Security Type is Standard then the secType variable will be empty 
 if [ -z $secType ]
 then 
-    $secType='Standard'
+    secType='Standard'
 fi
 
 #Saving tags of the VM
