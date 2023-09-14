@@ -45,6 +45,17 @@ dataDiskCount=$(az vm show --name $vmName --resource-group $rgName \
 nicID=$(az vm show --name $vmName --resource-group $rgName \
     --subscription "$subName" --query 'networkProfile.networkInterfaces[0].id' -o tsv)
 subnetID=$(az network nic show --ids $nicID --query 'ipConfigurations[0].subnet.id' -o tsv)
+secType=$(az disk show --disk-name $diskName --resource-group $rgName --subscription "$subName" \
+    --query securityProfile.securityType -o tsv)
+genType=$(az disk show --disk-name $diskName --resource-group $rgName --subscription "$subName" \
+    --query hyperVGeneration -o tsv)
+
+#If the Security Type is Standard then the secType variable will be empty 
+if [ -z $secType ]
+then 
+    $secType='Standard'
+fi
+
 #Saving tags of the VM
 az vm show --name $vmName --resource-group $rgName --subscription "$subName" \
     --query tags -o json > "$vmName"-tags.txt
@@ -60,7 +71,7 @@ fi
 
 echo -e "Creating a new disk from the snpashot"
 newOSDiks=$(az disk create -g $rgName -n "$diskName"-2 --subscription "$subName" --source "$diskName"-snapshot \
-    --size-gb $diskSize --sku $diskSAType --os-type $diskOS --hyper-v-generation V2 --public-network-access Disabled)
+    --size-gb $diskSize --sku $diskSAType --os-type $diskOS --hyper-v-generation $genType --public-network-access Disabled)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
@@ -101,7 +112,7 @@ fi
 
 echo -e "Creating the new VM........"
 resizedVM=$(az vm create -g $rgName --name "$newVMName" --subscription "$subName" --attach-os-disk "$diskName"-2 \
-    --os-type $diskOS --size $newSize --nics $vmNIC --security-type TrustedLaunch)
+    --os-type $diskOS --size $newSize --nics $vmNIC --security-type $secType)
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}[Success]${NC}\n"
 else 
